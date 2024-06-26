@@ -15,16 +15,16 @@ class Author(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255), nullable=False, unique=True)
-    bio = Column(String(511), nulable=False)
+    bio = Column(String(511), nullable=False)
 
 
 class Book(Base):
     __tablename__ = "books"
 
     id = Column(Integer, primary_key=True)
-    title = Column(String(255), nulable=False)
-    summary = Column(String(511), nulable=False)
-    publication_date = Column(Date, nulable=False)
+    title = Column(String(255), nullable=False)
+    summary = Column(String(511), nullable=False)
+    publication_date = Column(Date, nullable=False)
     author_id = Column(Integer, ForeignKey("authors.id"), nullable=False)
 
     author = relationship(Author, backref="books")
