@@ -2,13 +2,10 @@ from typing import List
 from datetime import date
 from pydantic import BaseModel
 
-from db.models import Book
-
 
 class AuthorBase(BaseModel):
     name: str
     bio: str
-    books: List[Book] | None
 
 
 class AuthorCreate(AuthorBase):
@@ -17,6 +14,7 @@ class AuthorCreate(AuthorBase):
 
 class Author(AuthorBase):
     id: int
+    books: List["Book"] = []
 
     class Config:
         orm_mode = True
@@ -25,7 +23,7 @@ class Author(AuthorBase):
 class BookBase(BaseModel):
     title: str
     summary: str
-    publication: date
+    publication_date: date
 
 
 class BookCreate(BookBase):
@@ -34,7 +32,7 @@ class BookCreate(BookBase):
 
 class Book(BookBase):
     id: int
-    author: Author
+    author: AuthorBase
 
     class Config:
         orm_mode = True

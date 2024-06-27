@@ -28,4 +28,4 @@ class Book(Base):
     publication_date = Column(Date, nullable=False)
     author_id = Column(Integer, ForeignKey("authors.id"), nullable=False)
 
-    author = relationship(Author, back_populates="books")
+    author = relationship("Author", back_populates="books")
